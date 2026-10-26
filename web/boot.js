@@ -1,0 +1,1 @@
+(async()=>{try{let b=await api('bootstrap');token=b.token;projects=b.projects;sdk=b.sdk;let last=localStorage.getItem('nf-project');await openProject(projects.some(p=>p.id===last)?last:projects[0]?.id||'demo')}catch(e){$('#app').innerHTML='<div class="content"><h1>Не удалось открыть проект</h1><p>'+esc(e.message)+'</p></div>'}})();

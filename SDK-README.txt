@@ -1,0 +1,1 @@
+Use your supplied renpy-8.5.3-sdk.zip. Extract its renpy-8.5.3-sdk folder next to NovelForge, then launch Start-Windows.bat. No separate Python installation is required in this layout. If SDK is elsewhere, use Start-From-SDK.bat. See README-RU.md.

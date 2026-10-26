@@ -1,0 +1,19 @@
+NovelForge 1.4 — scope of verification
+
+42 Python unit/integration tests: core model, Word and TXT formats, complete scenario/settings round trips, quoted pipes/newlines/whitespace, project and HTTP archive round trips, import of editable labels/characters/resources/screens, byte-preserving unchanged native source, edited native dialogue/characters/variables, newly added labels and credits, nested dialogue edits, source conflicts, export/reimport of native baselines, local label scopes and entry rename, CRLF preservation, multiline strings and Character definitions, init-python declarations, archive/resource path rejection, chunked multi-game import and empty files, WAV synthesis, mini-game rewards and layout validation.
+
+Version 1.4 additions: nested if/elif/else and inline-menu import/edit/export, complete TXT tree metadata round trips and unclosed-block rejection, bounded nested validation, literal/comment/multiline-safe source rewriting, renamed local-label references, conservative fallback for unsupported expressions, and HTTP block parsing/source-aware clipboard.
+
+JavaScript checks: 16 views including the populated graphics/music editors, expression interpreter, visual mini-game builder and insertion before a terminating return. Nested tree rendering, literal search, recursive reference changes, event clipboard and image alias consistency also passed. These are view/model checks in Node VM, not a full browser end-to-end test.
+
+Shipped graphics compositor executed with a native Canvas implementation: actual pixel checks for layers, opacity and visibility; PNG output; document/layer creation, duplication, flipping and deletion. Bundled multi-layer cover rendered and visually inspected.
+
+Shipped audio engine executed: real stereo synthesis, finite/non-silent samples, valid PCM WAV, MIDI multi-track/tempo/note round trips, invalid input and missing sampler resource handling.
+
+Actual RenPy 8.5.3.26051504 runtime: all standard generated screens rendered, including dialogue, choice, compositions, credits, save/load/preferences and five mini-game screens. Native SDK The Question import rendered and executed added events, a variable change, character show/hide with original tag, image object, credits and cutscene with the original UI at 1920x1080 and with the replacement UI at 1280x720. Expected dimensions and character hiding were asserted in the engine.
+
+Structured branching and inline menus were executed in both generated and imported native games, including a call/return inside a menu arm and final score assertion.
+
+Demo project lint passed on the supplied SDK. Editing translated dialogue can produce orphan translation notices; translation regeneration remains an author task.
+
+Not verified: full browser interaction, Windows/macOS execution, SDK 7 runtime, Steam client, every possible third-party RenPy extension and every gameplay branch. Configured large-import cap (32 GiB / 200000 files) was tested with smaller multi-game/chunk fixtures, not a complete 32 GiB transfer. PSD/FLP/VST and the full feature sets of Photoshop/FL Studio are not implemented; supported editor operations are listed in CHANGELOG-1.3.md.

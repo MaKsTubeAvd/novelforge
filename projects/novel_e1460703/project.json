@@ -1,0 +1,240 @@
+{
+  "format": 1,
+  "revision": 4,
+  "title": "Моя первая новелла",
+  "target": "8",
+  "start": "arrival",
+  "characters": [
+    {
+      "id": "anna",
+      "name": "Анна",
+      "sprite": "anna.png",
+      "color": "#b7a4ff",
+      "height": "medium"
+    }
+  ],
+  "variables": [
+    {
+      "id": "trust",
+      "value": 0
+    },
+    {
+      "id": "day",
+      "value": 1
+    }
+  ],
+  "scenes": [
+    {
+      "id": "arrival",
+      "name": "Знакомство",
+      "events": [
+        {
+          "asset": "court.png",
+          "effect": "dissolve",
+          "type": "background"
+        },
+        {
+          "value": 1.0,
+          "type": "day"
+        },
+        {
+          "character": "anna",
+          "position": "right",
+          "effect": "dissolve",
+          "type": "show"
+        },
+        {
+          "character": "anna",
+          "text": "Привет! Сыграем в волейбол?",
+          "type": "say"
+        },
+        {
+          "options": [
+            {
+              "text": "Конечно!",
+              "target": "play"
+            },
+            {
+              "text": "Сначала познакомимся",
+              "target": "talk"
+            }
+          ],
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "talk",
+      "name": "Разговор",
+      "events": [
+        {
+          "character": "anna",
+          "text": "Я Анна. Рада знакомству!",
+          "type": "say"
+        },
+        {
+          "variable": "trust",
+          "value": "trust + 1",
+          "type": "set"
+        },
+        {
+          "target": "play",
+          "type": "jump"
+        }
+      ]
+    },
+    {
+      "id": "play",
+      "name": "Первый матч",
+      "events": [
+        {
+          "game": "volley",
+          "variable": "trust",
+          "type": "minigame"
+        },
+        {
+          "expression": "trust >= 3",
+          "yes": "win",
+          "no": "finish",
+          "type": "condition"
+        }
+      ]
+    },
+    {
+      "id": "win",
+      "name": "Победа",
+      "events": [
+        {
+          "id": "FIRST_WIN",
+          "type": "achievement"
+        },
+        {
+          "text": "Отличная команда!",
+          "credits": true,
+          "type": "ending"
+        }
+      ]
+    },
+    {
+      "id": "finish",
+      "name": "До встречи",
+      "events": [
+        {
+          "text": "Продолжим тренировку завтра!",
+          "credits": true,
+          "type": "ending"
+        }
+      ]
+    }
+  ],
+  "interface": {
+    "preset": "violet",
+    "accent": "#ad93ff",
+    "background": "#111126",
+    "panel": "#191831",
+    "text": "#f7f4ff",
+    "textboxY": 0.74,
+    "textboxH": 0.24,
+    "fontSize": 28,
+    "nameSize": 30,
+    "elements": [
+      {
+        "type": "bar",
+        "label": "Доверие",
+        "variable": "trust",
+        "max": 10,
+        "x": 0.78,
+        "y": 0.04,
+        "width": 240
+      },
+      {
+        "type": "text",
+        "label": "Лето на площадке",
+        "x": 0.03,
+        "y": 0.04,
+        "width": 400
+      }
+    ]
+  },
+  "intro": {
+    "video": "",
+    "cards": [
+      {
+        "text": "SimplePen Studio представляет",
+        "background": "#12132e",
+        "seconds": 2
+      },
+      {
+        "text": "Лето на площадке",
+        "background": "#27204d",
+        "seconds": 2
+      }
+    ]
+  },
+  "cutscenes": [
+    {
+      "id": "opening",
+      "cards": [
+        {
+          "text": "За день до финала…",
+          "background": "#12132e",
+          "seconds": 2
+        }
+      ]
+    }
+  ],
+  "credits": {
+    "title": "Над игрой работали",
+    "lines": "Автор — ваше имя\nМузыка — укажите авторов\nСпасибо за игру!",
+    "seconds": 10
+  },
+  "minigames": [
+    {
+      "id": "volley",
+      "title": "Тренировка подачи",
+      "kind": "volleyball",
+      "target": 5,
+      "seconds": 25,
+      "question": "",
+      "answers": []
+    },
+    {
+      "id": "quiz",
+      "title": "Правила волейбола",
+      "kind": "quiz",
+      "target": 1,
+      "seconds": 30,
+      "question": "Сколько игроков в команде на площадке?",
+      "answers": [
+        {
+          "text": "Шесть",
+          "correct": true
+        },
+        {
+          "text": "Семь",
+          "correct": false
+        }
+      ]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "FIRST_WIN",
+      "name": "Первая победа",
+      "description": "Завершить тренировку",
+      "steam": "FIRST_WIN"
+    }
+  ],
+  "steam": {
+    "appid": "",
+    "enabled": false
+  },
+  "python": [
+    {
+      "id": "custom",
+      "asset": "",
+      "function": "run",
+      "mode": "function"
+    }
+  ]
+}

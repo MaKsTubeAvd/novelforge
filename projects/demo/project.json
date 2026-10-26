@@ -1,0 +1,852 @@
+{
+  "format": 1,
+  "revision": 0,
+  "title": "Лето на площадке",
+  "target": "8",
+  "start": "arrival",
+  "characters": [
+    {
+      "id": "anna",
+      "name": "Анна",
+      "color": "#b7a4ff",
+      "sprite": "anime_woman.png",
+      "height": "medium",
+      "variants": [
+        {
+          "id": "stand_neutral",
+          "name": "Стоя · neutral",
+          "asset": "anna_stand_neutral.png"
+        },
+        {
+          "id": "stand_smile",
+          "name": "Стоя · smile",
+          "asset": "anna_stand_smile.png"
+        },
+        {
+          "id": "stand_happy",
+          "name": "Стоя · happy",
+          "asset": "anna_stand_happy.png"
+        },
+        {
+          "id": "stand_sad",
+          "name": "Стоя · sad",
+          "asset": "anna_stand_sad.png"
+        },
+        {
+          "id": "stand_surprise",
+          "name": "Стоя · surprise",
+          "asset": "anna_stand_surprise.png"
+        },
+        {
+          "id": "stand_angry",
+          "name": "Стоя · angry",
+          "asset": "anna_stand_angry.png"
+        },
+        {
+          "id": "stand_wink",
+          "name": "Стоя · wink",
+          "asset": "anna_stand_wink.png"
+        },
+        {
+          "id": "stand_determined",
+          "name": "Стоя · determined",
+          "asset": "anna_stand_determined.png"
+        },
+        {
+          "id": "wave_smile",
+          "name": "wave · Улыбка",
+          "asset": "anna_wave_smile.png"
+        },
+        {
+          "id": "hip_smile",
+          "name": "hip · Улыбка",
+          "asset": "anna_hip_smile.png"
+        },
+        {
+          "id": "crossed_smile",
+          "name": "crossed · Улыбка",
+          "asset": "anna_crossed_smile.png"
+        },
+        {
+          "id": "thoughtful_smile",
+          "name": "thoughtful · Улыбка",
+          "asset": "anna_thoughtful_smile.png"
+        },
+        {
+          "id": "open_smile",
+          "name": "open · Улыбка",
+          "asset": "anna_open_smile.png"
+        },
+        {
+          "id": "sit_smile",
+          "name": "sit · Улыбка",
+          "asset": "anna_sit_smile.png"
+        },
+        {
+          "id": "point_smile",
+          "name": "point · Улыбка",
+          "asset": "anna_point_smile.png"
+        },
+        {
+          "id": "anime_wave",
+          "name": "Аниме · Приветствие",
+          "asset": "anime_woman_wave.png"
+        }
+      ]
+    },
+    {
+      "id": "alex",
+      "name": "Алексей",
+      "color": "#87c9ff",
+      "sprite": "anime_man.png",
+      "height": "large",
+      "variants": []
+    }
+  ],
+  "variables": [
+    {
+      "id": "trust",
+      "value": 0
+    },
+    {
+      "id": "day",
+      "value": 1
+    }
+  ],
+  "scenes": [
+    {
+      "id": "arrival",
+      "name": "Знакомство",
+      "events": [
+        {
+          "type": "background",
+          "asset": "court_photo.png",
+          "effect": "dissolve"
+        },
+        {
+          "type": "music",
+          "asset": "gentle_loop.wav",
+          "volume": 0.45,
+          "fadein": 1.5,
+          "loop": true
+        },
+        {
+          "type": "sound",
+          "asset": "soft_bell.wav",
+          "volume": 0.5,
+          "fadein": 0,
+          "loop": false
+        },
+        {
+          "type": "day",
+          "value": 1
+        },
+        {
+          "type": "show",
+          "character": "anna",
+          "position": "right",
+          "effect": "dissolve",
+          "variant": ""
+        },
+        {
+          "type": "say",
+          "character": "anna",
+          "text": "Привет! Сыграем в волейбол?"
+        },
+        {
+          "type": "choice",
+          "options": [
+            {
+              "text": "Конечно!",
+              "target": "play"
+            },
+            {
+              "text": "Сначала познакомимся",
+              "target": "talk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "talk",
+      "name": "Разговор",
+      "events": [
+        {
+          "type": "say",
+          "character": "anna",
+          "text": "Я Анна. Рада знакомству!"
+        },
+        {
+          "type": "set",
+          "variable": "trust",
+          "value": "trust + 1"
+        },
+        {
+          "type": "jump",
+          "target": "play"
+        }
+      ]
+    },
+    {
+      "id": "play",
+      "name": "Первый матч",
+      "events": [
+        {
+          "type": "minigame",
+          "game": "volley",
+          "variable": "trust"
+        },
+        {
+          "type": "condition",
+          "expression": "trust >= 3",
+          "yes": "win",
+          "no": "finish"
+        }
+      ]
+    },
+    {
+      "id": "win",
+      "name": "Победа",
+      "events": [
+        {
+          "type": "achievement",
+          "id": "FIRST_WIN"
+        },
+        {
+          "type": "ending",
+          "text": "Отличная команда!",
+          "credits": true
+        }
+      ]
+    },
+    {
+      "id": "finish",
+      "name": "До встречи",
+      "events": [
+        {
+          "type": "ending",
+          "text": "Продолжим тренировку завтра!",
+          "credits": true
+        }
+      ]
+    },
+    {
+      "id": "tree_demo",
+      "name": "Пример вложенного сценария",
+      "events": [
+        {
+          "type": "menu_block",
+          "prompt": "Исследовать окрестности?",
+          "options": [
+            {
+              "text": "Осмотреться",
+              "condition": "",
+              "events": [
+                {
+                  "type": "branch",
+                  "branches": [
+                    {
+                      "condition": "True",
+                      "events": [
+                        {
+                          "type": "say",
+                          "character": "",
+                          "text": "Вы нашли тихое место. Это реплика внутри условия и выбора."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "text": "Остаться",
+              "condition": "",
+              "events": [
+                {
+                  "type": "say",
+                  "character": "",
+                  "text": "Вы решили отдохнуть."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "return"
+        }
+      ]
+    }
+  ],
+  "interface": {
+    "preset": "violet",
+    "accent": "#ad93ff",
+    "background": "#111126",
+    "panel": "#191831",
+    "text": "#f7f4ff",
+    "textboxY": 0.7,
+    "textboxH": 0.235,
+    "fontSize": 26,
+    "nameSize": 28,
+    "elements": [
+      {
+        "type": "bar",
+        "label": "Доверие",
+        "variable": "trust",
+        "max": 10,
+        "x": 0.78,
+        "y": 0.04,
+        "width": 240
+      },
+      {
+        "type": "text",
+        "label": "Лето на площадке",
+        "x": 0.03,
+        "y": 0.04,
+        "width": 400
+      }
+    ],
+    "textboxX": 0.035,
+    "textboxW": 0.93,
+    "padding": 18,
+    "panelOpacity": 0.94,
+    "radius": 16,
+    "quickY": 0.945,
+    "backdrop": "aurora",
+    "pattern": "orbits",
+    "patternOpacity": 0.18,
+    "menuAlign": "left",
+    "menuImage": "court_photo.png",
+    "images": [],
+    "hoverText": "#12131b",
+    "buttonSize": 24,
+    "titleSize": 36,
+    "textOffsetX": 0,
+    "textOffsetY": 0,
+    "textAlign": "left",
+    "textSpeed": 35,
+    "textAnimation": "typewriter",
+    "lineSpacing": 0,
+    "nameOffsetX": 0,
+    "nameOffsetY": 0
+  },
+  "intro": {
+    "video": "",
+    "cards": [
+      {
+        "text": "SimplePen Studio представляет",
+        "background": "#12132e",
+        "seconds": 2,
+        "images": [
+          {
+            "asset": "novelforge_logo.png",
+            "x": 0.5,
+            "y": 0.28,
+            "width": 360,
+            "height": 180,
+            "opacity": 1,
+            "rotation": 0,
+            "z": 0
+          }
+        ],
+        "textX": 0.5,
+        "textY": 0.55,
+        "textWidth": 1000,
+        "fontSize": 44,
+        "textColor": "#ffffff"
+      },
+      {
+        "text": "Лето на площадке",
+        "background": "#27204d",
+        "seconds": 2,
+        "images": [],
+        "textX": 0.5,
+        "textY": 0.55,
+        "textWidth": 1000,
+        "fontSize": 44,
+        "textColor": "#ffffff"
+      }
+    ]
+  },
+  "cutscenes": [
+    {
+      "id": "opening",
+      "cards": [
+        {
+          "text": "За день до финала…",
+          "background": "#12132e",
+          "seconds": 2,
+          "images": [],
+          "textX": 0.5,
+          "textY": 0.55,
+          "textWidth": 1000,
+          "fontSize": 44,
+          "textColor": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "credits": {
+    "title": "Над игрой работали",
+    "lines": "Автор — ваше имя\nМузыка — укажите авторов\nСпасибо за игру!",
+    "seconds": 18,
+    "style": "cinema",
+    "images": [
+      {
+        "asset": "novelforge_logo.png",
+        "x": 0.5,
+        "y": 0.14,
+        "width": 230,
+        "height": 115,
+        "opacity": 1,
+        "rotation": 0,
+        "z": 0
+      }
+    ],
+    "backgroundImage": "",
+    "textY": 0.28,
+    "textH": 0.55
+  },
+  "minigames": [
+    {
+      "id": "volley",
+      "title": "Тренировка подачи",
+      "kind": "volleyball",
+      "target": 5,
+      "seconds": 25,
+      "question": "",
+      "answers": [],
+      "objects": [],
+      "backgroundImage": "",
+      "winTarget": "",
+      "loseTarget": "",
+      "rewardVariable": "",
+      "rewardWin": 1,
+      "rewardLose": 0
+    },
+    {
+      "id": "quiz",
+      "title": "Правила волейбола",
+      "kind": "quiz",
+      "target": 1,
+      "seconds": 30,
+      "question": "Сколько игроков в команде на площадке?",
+      "answers": [
+        {
+          "text": "Шесть",
+          "correct": true
+        },
+        {
+          "text": "Семь",
+          "correct": false
+        }
+      ],
+      "objects": [],
+      "backgroundImage": "",
+      "winTarget": "",
+      "loseTarget": "",
+      "rewardVariable": "",
+      "rewardWin": 1,
+      "rewardLose": 0
+    },
+    {
+      "id": "search",
+      "title": "Найдите три подсказки",
+      "kind": "hotspot",
+      "target": 3,
+      "seconds": 20,
+      "backgroundImage": "library_photo.png",
+      "objects": [
+        {
+          "x": 200,
+          "y": 260,
+          "width": 100,
+          "height": 80,
+          "points": 1,
+          "label": "Подсказка 1",
+          "asset": ""
+        },
+        {
+          "x": 500,
+          "y": 420,
+          "width": 100,
+          "height": 80,
+          "points": 1,
+          "label": "Подсказка 2",
+          "asset": ""
+        },
+        {
+          "x": 800,
+          "y": 260,
+          "width": 100,
+          "height": 80,
+          "points": 1,
+          "label": "Подсказка 3",
+          "asset": ""
+        }
+      ],
+      "winTarget": "win",
+      "loseTarget": "finish",
+      "rewardVariable": "trust",
+      "rewardWin": 2,
+      "rewardLose": 0
+    }
+  ],
+  "achievements": [
+    {
+      "id": "FIRST_WIN",
+      "name": "Первая победа",
+      "description": "Завершить тренировку",
+      "steam": "FIRST_WIN"
+    }
+  ],
+  "steam": {
+    "appid": "",
+    "enabled": false
+  },
+  "python": [
+    {
+      "id": "custom",
+      "asset": "",
+      "function": "run",
+      "mode": "function"
+    }
+  ],
+  "artboards": [],
+  "editorVersion": "1.4",
+  "graphicsDocuments": [
+    {
+      "id": "cover_demo",
+      "name": "Обложка истории",
+      "width": 1280,
+      "height": 720,
+      "layers": [
+        {
+          "id": "photo",
+          "name": "Фотографический задник",
+          "kind": "image",
+          "asset": "street_photo.png",
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "opacity": 1,
+          "rotation": 0,
+          "blend": "source-over",
+          "visible": true
+        },
+        {
+          "id": "shade",
+          "name": "Затемнение",
+          "kind": "rect",
+          "color": "#111126",
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "opacity": 0.45,
+          "rotation": 0,
+          "blend": "source-over",
+          "visible": true
+        },
+        {
+          "id": "title",
+          "name": "Заголовок",
+          "kind": "text",
+          "text": "ЛЕТО НА ПЛОЩАДКЕ",
+          "color": "#ffffff",
+          "fontSize": 60,
+          "fontWeight": "bold",
+          "x": 90,
+          "y": 280,
+          "width": 1100,
+          "height": 100,
+          "opacity": 1,
+          "rotation": 0,
+          "blend": "source-over",
+          "visible": true
+        },
+        {
+          "id": "subtitle",
+          "name": "Подзаголовок",
+          "kind": "text",
+          "text": "История начинается с одного решения",
+          "color": "#d8cfff",
+          "fontSize": 30,
+          "fontWeight": "normal",
+          "x": 94,
+          "y": 375,
+          "width": 1000,
+          "height": 70,
+          "opacity": 1,
+          "rotation": 0,
+          "blend": "source-over",
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "musicProjects": [
+    {
+      "id": "music_demo",
+      "name": "Тёплый вечер",
+      "bpm": 110,
+      "bars": 2,
+      "swing": 0,
+      "volume": 0.8,
+      "normalize": true,
+      "tracks": [
+        {
+          "volume": 0.8,
+          "pan": 0,
+          "mute": false,
+          "solo": false,
+          "attack": 15,
+          "decay": 100,
+          "sustain": 0.6,
+          "release": 220,
+          "cutoff": 12000,
+          "delay": 0.12,
+          "drive": 0,
+          "sample": "",
+          "sampleStart": 0,
+          "sampleEnd": 0,
+          "rootNote": 60,
+          "reverse": false,
+          "id": "melody",
+          "name": "Мелодия",
+          "instrument": "triangle",
+          "notes": [
+            {
+              "pitch": 60,
+              "start": 0,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 64,
+              "start": 2,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 67,
+              "start": 4,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 72,
+              "start": 6,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 71,
+              "start": 8,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 67,
+              "start": 10,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 64,
+              "start": 12,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 62,
+              "start": 14,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 57,
+              "start": 16,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 60,
+              "start": 18,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 64,
+              "start": 20,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 69,
+              "start": 22,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 67,
+              "start": 24,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 64,
+              "start": 26,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 60,
+              "start": 28,
+              "length": 2,
+              "velocity": 0.65
+            },
+            {
+              "pitch": 59,
+              "start": 30,
+              "length": 2,
+              "velocity": 0.65
+            }
+          ]
+        },
+        {
+          "volume": 0.45,
+          "pan": -0.2,
+          "mute": false,
+          "solo": false,
+          "attack": 150,
+          "decay": 100,
+          "sustain": 0.6,
+          "release": 350,
+          "cutoff": 12000,
+          "delay": 0.12,
+          "drive": 0,
+          "sample": "",
+          "sampleStart": 0,
+          "sampleEnd": 0,
+          "rootNote": 60,
+          "reverse": false,
+          "id": "pad",
+          "name": "Аккорды",
+          "instrument": "pad",
+          "notes": [
+            {
+              "pitch": 48,
+              "start": 0,
+              "length": 14,
+              "velocity": 0.55
+            },
+            {
+              "pitch": 52,
+              "start": 0,
+              "length": 14,
+              "velocity": 0.55
+            },
+            {
+              "pitch": 55,
+              "start": 0,
+              "length": 14,
+              "velocity": 0.55
+            },
+            {
+              "pitch": 45,
+              "start": 16,
+              "length": 14,
+              "velocity": 0.55
+            },
+            {
+              "pitch": 48,
+              "start": 16,
+              "length": 14,
+              "velocity": 0.55
+            },
+            {
+              "pitch": 52,
+              "start": 16,
+              "length": 14,
+              "velocity": 0.55
+            }
+          ]
+        },
+        {
+          "volume": 0.55,
+          "pan": 0,
+          "mute": false,
+          "solo": false,
+          "attack": 15,
+          "decay": 100,
+          "sustain": 0.6,
+          "release": 100,
+          "cutoff": 12000,
+          "delay": 0,
+          "drive": 0,
+          "sample": "",
+          "sampleStart": 0,
+          "sampleEnd": 0,
+          "rootNote": 60,
+          "reverse": false,
+          "id": "kick",
+          "name": "Ритм",
+          "instrument": "kick",
+          "notes": [
+            {
+              "pitch": 36,
+              "start": 0,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 4,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 8,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 12,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 16,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 20,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 24,
+              "length": 1,
+              "velocity": 0.7
+            },
+            {
+              "pitch": 36,
+              "start": 28,
+              "length": 1,
+              "velocity": 0.7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

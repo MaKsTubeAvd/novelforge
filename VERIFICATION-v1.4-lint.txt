@@ -1,0 +1,14 @@
+﻿Ren'Py 8.5.3.26051504 lint report, generated at: Tue Oct 27 04:02:23 2026
+It is advised to set config.check_conflicting_properties to True.
+
+
+Statistics:
+
+The game contains 7 dialogue blocks, containing 28 words and 180 characters,
+for an average of 4.0 words and 26 characters per block.
+
+The game contains 2 menus, 2 images, and 18 screens.
+
+
+Lint is not a substitute for thorough testing. Remember to update Ren'Py
+before releasing. New releases fix bugs and improve compatibility.
